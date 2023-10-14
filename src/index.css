@@ -1,0 +1,10 @@
+.flexContent{
+  display: flex;
+
+}
+.marginRight5{
+  margin-right: 5px;
+}
+.Mandatory{
+  color: red;
+}
