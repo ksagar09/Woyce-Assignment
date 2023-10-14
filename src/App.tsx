@@ -27,33 +27,37 @@ function App() {
   }
 
   const addEntryToTable = () => {
-    
-    if (editEnable === null) {
-
-      let oldTableData = [...tableEntry];
-      oldTableData.push(data)
-      localStorage.setItem("Products", JSON.stringify(oldTableData))
-      setTableEntry(oldTableData);
-      setEditEnable(false)
+    if (data.ProductName === "") {
+      alert('Please fill the data')
     } else {
-      let oldtableData = [...tableEntry];
 
-      oldtableData[editEnable] = data;
 
-      setTableEntry(oldtableData)
+      if (editEnable === null) {
 
+        let oldTableData = [...tableEntry];
+        oldTableData.push(data)
+        localStorage.setItem("Products", JSON.stringify(oldTableData))
+        setTableEntry(oldTableData);
+        setEditEnable(false)
+      } else {
+        let oldtableData = [...tableEntry];
+
+        oldtableData[editEnable] = data;
+
+        setTableEntry(oldtableData)
+
+      }
+      setData({
+        ProductName: '',
+        Email: "",
+        Price: "",
+        Quantity: "",
+        City: "",
+        State: "",
+        ZipCode: "",
+      })
+      setEditEnable(null)
     }
-    setData({
-      ProductName: '',
-      Email: "",
-      Price: "",
-      Quantity: "",
-      City: "",
-      State: "",
-      ZipCode: "",
-    })
-    setEditEnable(null)
-
 
   }
 
@@ -70,6 +74,7 @@ function App() {
     let removedItem = oldData.filter((_, ind) => { return ind !== index })
 
     setTableEntry(removedItem)
+    localStorage.setItem("Products", JSON.stringify(removedItem))
   }
 
   const editEntry = (index: number, iterator: any) => {
@@ -98,7 +103,7 @@ function App() {
   return (
     <>
       <div >
-        <label>Product name <span className='Mandatory'>*</span></label> 
+        <label>Product name <span className='Mandatory'>*</span></label>
         <input value={data.ProductName} onChange={(e) => getFormValues(e.target.value, "ProductName")} name='ProductName' placeholder='Product name' type='text' />
       </div>
       <div >
